@@ -8,7 +8,8 @@ wp-content/*
 !wp-content/mu-plugins/
 !wp-content/plugins/
 !wp-content/themes/
-
+!.git/hooks/pre-push
+!.git/hooks/update
 # ignore these plugins
 wp-content/plugins/hello.php
 
