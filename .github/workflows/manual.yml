@@ -1,4 +1,4 @@
-   # This is a basic workflow that is manually triggered
+# This is a basic workflow that is manually triggered
 
 name: Manual workflow
 
@@ -27,7 +27,4 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-       
-   # Make sure packages on the test/deploy container are up to date
-    - run: whoami && id
-    - run: sudo apt-get update -y
+      run: echo "Hello ${{ github.event.inputs.name }}"
