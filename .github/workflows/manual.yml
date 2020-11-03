@@ -1,40 +1,64 @@
-Deployment on Production:
-   script:
+   # This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Person to greet'
+        # Default value if no value is explicitly provided
+        default: 'World'
+        # Input has to be provided for the workflow to run
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  greet:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: Send greeting
+       
    # Make sure packages on the test/deploy container are up to date
-      - apt-get update -y
+      run: apt-get update -y
 
    # Create the SSH directory (we need this to store known_hosts in)
-     - mkdir -p ~/.ssh 
+      run: mkdir -p ~/.ssh 
 
       # run ssh-agent
-     - eval $(ssh-agent -s)
+      run: eval $(ssh-agent -s)
 
       # add ssh key stored in KEY variable directly to the agent store without saving it
       # to a file first.
-      - bash -c 'ssh-add <(echo -e "$SSH_KEY")'
+      run: bash -c 'ssh-add <(echo -e "$SSH_KEY")'
 
       # add the host public keys stored in KEY variable to the known_hosts file, so we can
       # trust the server we're connecting to is correct
-      - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+      run: echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
 
       # Set ssh directory / file permissions
-      - chmod 400 -R ~/.ssh
+      run: chmod 400 -R ~/.ssh
 
       # Install git ftp and make it executable
-      - curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > /usr/bin/git-ftp
-      - chmod +x /usr/bin/git-ftp
+      run: curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > /usr/bin/git-ftp
+      run: chmod +x /usr/bin/git-ftp
 
-      - git config --global user.email "gituser@github.com"
-      - git config --global user.name "gituser"
+      run: git config --global user.email "gituser@github.com"
+      run: git config --global user.name "gituser"
       # Use git-ftp to copy all the files to the server, while keeping the connection
       
        
-      - git ftp push --user frpuser --passwd ftp-user-password "ftp://SERVER-IP-ADDRESS:22/home/user/public_html" -f || exit_code=$?
-      - if [[ $exit_code -ne 0 ]]; then git ftp init --user frpuser --passwd ftp-user-password "ftp://SERVER-IP-ADDRESS:22/home/user/public_html" -f; fi;
+      run: git ftp push --user frpuser --passwd ftp-user-password "ftp://SERVER-IP-ADDRESS:22/home/user/public_html" -f || exit_code=$?
+      if [[ $exit_code -ne 0 ]]; then git ftp init --user frpuser --passwd ftp-user-password "ftp://SERVER-IP-ADDRESS:22/home/user/public_html" -f; fi;
 
 
-      - echo "Pushed to DEV Server"
-
-   when: manual
-   only:
-    - master
+      run: echo "Pushed to DEV Server"
