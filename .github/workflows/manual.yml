@@ -28,8 +28,8 @@ jobs:
       - run: whoami && id
       - run: sudo apt-get update -y
       # Install git ftp and make it executable
-      - run: curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > /usr/bin/git-ftp
-      - run: chmod +x /usr/bin/git-ftp
+      - run: sudo curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > /usr/bin/git-ftp
+      - run: sudo chmod +x /usr/bin/git-ftp
 
       - run: git config --global user.email "gituser@github.com"
       - run: git config --global user.name "gituser"
