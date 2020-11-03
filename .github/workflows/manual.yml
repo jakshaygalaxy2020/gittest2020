@@ -10,7 +10,7 @@ jobs:
       - run: mkdir ~/bin && curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > ~/bin/git-ftp
       - run: chmod +x ~/bin/git-ftp
       - run: git clone https://github.com/jakshaygalaxy2020/gittest2020.git 
-      - run: cd gittest2020 && pwd && ls -la
+      - run: cd gittest2020 && pwd && ls -la && git status
 
       - run: git config --global user.email "akshay.jain@galaxyweblinks.in"
       - run: git config --global user.name "jakshaygalaxy2020"
