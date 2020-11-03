@@ -30,32 +30,3 @@ jobs:
        
    # Make sure packages on the test/deploy container are up to date
       run: apt-get update -y
-
-   # Create the SSH directory (we need this to store known_hosts in)
-      run: mkdir -p ~/.ssh 
-
-      # run ssh-agent
-      run: eval $(ssh-agent -s)
-
-      # add ssh key stored in KEY variable directly to the agent store without saving it
-      # to a file first.
-      run: bash -c 'ssh-add <(echo -e "$SSH_KEY")'
-
-      # add the host public keys stored in KEY variable to the known_hosts file, so we can
-      # trust the server we're connecting to is correct
-      run: echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-
-      # Set ssh directory / file permissions
-      run: chmod 400 -R ~/.ssh
-
-      # Install git ftp and make it executable
-      run: curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > /usr/bin/git-ftp
-      run: chmod +x /usr/bin/git-ftp
-
-      run: git config --global user.email "gituser@github.com"
-      run: git config --global user.name "gituser"
-      # Use git-ftp to copy all the files to the server, while keeping the connection
-      
-       
-      run: git ftp push --user frpuser --passwd ftp-user-password "ftp://SERVER-IP-ADDRESS:22/home/user/public_html" -f || exit_code=$?
-      if [[ $exit_code -ne 0 ]]; then git ftp init --user frpuser --passwd ftp-user-password "ftp://SERVER-IP-ADDRESS:22/home/user/public_html" -f; fi;
