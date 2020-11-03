@@ -1,21 +1,14 @@
-# This is a basic workflow that is manually triggered
-
-name: Manual workflow
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
+name: learn-github-actions
 on: [push]
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  check-bats-version:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - run: whoami && id
-      - run: sudo apt-get update -y &&
+      - run: sudo apt-get update -y
       # Install git ftp and make it executable
-      - run: mkdir ~/bin && curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > ~/bin/git-ftp
-      - run: chmod +x ~/bin/git-ftp
+      - run: sudo curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > /usr/bin/git-ftp
+      - run: sudo chmod +x /usr/bin/git-ftp
 
       - run: git config --global user.email "gituser@github.com"
       - run: git config --global user.name "gituser"
