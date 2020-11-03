@@ -13,4 +13,4 @@ jobs:
       - run: git config --global user.email "gituser@github.com"
       - run: git config --global user.name "gituser"
       # Use git-ftp to copy all the files to the server, while keeping the connection
-      - run: git ftp push --user upload --passwd "Galaxy@123" "ftp://13.56.209.238:22/"
+      - run: git ftp init --user upload --passwd "Galaxy@123" "ftp://13.56.209.238:22/"
