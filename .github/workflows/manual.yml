@@ -29,5 +29,5 @@ jobs:
     - name: Send greeting
        
    # Make sure packages on the test/deploy container are up to date
-      run: whoami && id
-      run: sudo apt-get update -y
+    - run: whoami && id
+    - run: sudo apt-get update -y
