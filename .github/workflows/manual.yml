@@ -59,6 +59,3 @@ jobs:
        
       run: git ftp push --user frpuser --passwd ftp-user-password "ftp://SERVER-IP-ADDRESS:22/home/user/public_html" -f || exit_code=$?
       if [[ $exit_code -ne 0 ]]; then git ftp init --user frpuser --passwd ftp-user-password "ftp://SERVER-IP-ADDRESS:22/home/user/public_html" -f; fi;
-
-
-      run: echo "Pushed to DEV Server"
