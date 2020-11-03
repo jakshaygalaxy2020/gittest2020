@@ -7,15 +7,12 @@ name: Manual workflow
 on: [push]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
-  greet:
-    # The type of runner that the job will run on
     runs-on: ruby:2.5
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - run: whoami && id
-      - run: sudo apt-get update -y
+      - run: sudo apt-get update -y &&
       # Install git ftp and make it executable
       - run: sudo curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > /usr/bin/git-ftp
       - run: sudo chmod +x /usr/bin/git-ftp
