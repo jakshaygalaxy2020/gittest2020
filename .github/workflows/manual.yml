@@ -12,7 +12,7 @@ jobs:
       - run: cd ~/git-deploy && git clone https://github.com/jakshaygalaxy2020/gittest2020.git 
       - run: cd gittest2020 && pwd && ls -la && git status
 
-      - run: git config --global user.email "akshay.jain@galaxyweblinks.in"
-      - run: git config --global user.name "jakshaygalaxy2020"
+      - run: git config git-ftp.url "ftp://13.56.209.238:21/"
+      - run: git config git-ftp.user "upload" && git config git-ftp.password "Galaxy@123"
       # Use git-ftp to copy all the files to the server, while keeping the connection
-      - run: git ftp init --user upload --passwd "Galaxy@123" "ftp://13.56.209.238/"
+      - run: git ftp init
