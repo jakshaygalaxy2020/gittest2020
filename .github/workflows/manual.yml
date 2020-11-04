@@ -8,9 +8,6 @@ jobs:
       - run: mkdir ~/bin && curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > ~/bin/git-ftp
       - run: chmod +x ~/bin/git-ftp
       - run: git clone https://github.com/jakshaygalaxy2020/gittest2020.git 
-      - run: cd gittest2020 && pwd && ls -la && git status
-
-      - run: git config --global user.email "akshay.jain@galaxyweblinks.in"
-      - run: git config --global user.name "jakshaygalaxy2020"
+      - run: cd gittest2020 && pwd && ls -la && git ftp --version && curl -V && git status 
       # Use git-ftp to copy all the files to the server, while keeping the connection
       - run: git ftp init --user upload --passwd "Galaxy@123" "ftp://13.56.209.238/"
