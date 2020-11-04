@@ -9,7 +9,7 @@ jobs:
       # Install git ftp and make it executable
       - run: mkdir ~/bin && curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > ~/bin/git-ftp
       - run: chmod +x ~/bin/git-ftp
-      - run: cd /home/runner/work/gittest2020 && pwd && ls -la && git status
+      - run: cd /home/runner/work/gittest2020/gittest2020 && pwd && ls -la && git status
 
       - run: git config git-ftp.url "ftp://13.56.209.238:21/"
       - run: git config git-ftp.user "upload" && git config git-ftp.password "Galaxy@123"
